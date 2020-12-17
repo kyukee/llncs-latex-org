@@ -77,14 +77,13 @@ Put the abstract here.
 Provides a global overview. This should be the last thing you write, after everything else is done. It talk about the objective, contents and conclusions.
 Example of how to use a citation\cite{orgmode}.
 
-#+LaTeX: \end{abstract}
-
-
 #+LaTeX: \begin{keywords}
 Keyword1 \and
 Keyword2 \and
 Keyword3
 #+LaTeX: \end{keywords}
+
+#+LaTeX: \end{abstract}
 
 ** Introduction (and Motivation)
 *** Background and Context
