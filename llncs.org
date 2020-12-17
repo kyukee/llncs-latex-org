@@ -1,0 +1,206 @@
+# -*- coding: utf-8 -*-
+# -*- mode: org -*-
+
+#+TITLE: Dissertation Proposal in Org mode
+#+AUTHOR: Author Name
+# This Title and Author only apply to this Org document, and not to the Latex output
+
+#+STARTUP: overview indent
+#+LANGUAGE: en-us
+#+OPTIONS: H:3 creator:nil timestamp:nil skip:nil toc:nil num:t ^:nil ~:~
+#+OPTIONS: author:nil title:nil date:nil
+#+TAGS: noexport(n) deprecated(d) ignore(i)
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+#+LATEX_CLASS: LLNCS
+#+LATEX_CLASS_OPTIONS: [conference,letter,10pt,final]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+
+* Info                                                             :noexport:
+
+Original source: https://github.com/schnorr/llncsorg
+
+*Compiling*
+
+To create the latex and pdf documents, just run 'make' in a terminal or 'M-x compile' inside emacs
+
+*Exporting*
+
+The 'noexport' tag excludes a heading and its contents.
+The 'ignore' tag excludes the heading while still including its contents.
+
+*Comments*
+
+Comment a line to avoid exporting it, like this:
+# Lines like this won't be exported
+
+* Task Management                                                  :noexport:
+** TODO do thing A
+
+task details
+
+** TODO do thing B
+
+task details
+
+* *The Paper*                                                       :ignore:
+** Latex configurations                                             :ignore:
+** Frontpage                                                        :ignore:
+#+BEGIN_EXPORT latex
+\title{Dissertation Proposal}
+%\titlerunning{}
+%\toctitle{}
+%\subtitle{}
+
+\author{Author Name\inst{1} \and Somebody Else\inst{2}}
+%\authorrunning{}
+%\tocauthor{}
+\institute{
+Institution Name, Location, Country \\
+\email{name@email.com}
+\and
+Somebody else's Institution, Location, Country \\
+\email{else@inf}}
+
+% \thanks can be used anywhere in author, institute and title
+#+END_EXPORT
+
+#+LaTeX: \maketitle
+
+** Abstract                                                         :ignore:
+
+#+LaTeX: \begin{abstract}
+
+Put the abstract here.
+Provides a global overview. This should be the last thing you write, after everything else is done. It talk about the objective, contents and conclusions.
+Example of how to use a citation\cite{orgmode}.
+
+#+LaTeX: \end{abstract}
+
+
+#+LaTeX: \begin{keywords}
+Keyword1 \and
+Keyword2 \and
+Keyword3
+#+LaTeX: \end{keywords}
+
+** Introduction (and Motivation)
+*** Background and Context
+\label{sec.context}
+
+Explain all the necessary concepts.
+
+*** Problem Definition
+
+Define the problem explicitly and objectively.
+Example of label usage: See section \ref{sec.context}.
+
+*** Objectives
+
+What are the goals? What are we trying to achieve?
+Give concrete and measurable requirements.
+
+** Related Work (State of the Art)
+*** Related Methods
+
+List existing methodologies that can be useful for this work.
+For each item, say why it is relevant, how it can help the current work and give a critical evaluation, if appropriate.
+
+*** Related Tools
+
+List existing tools that can be useful for this work.
+For each item, say why it is relevant, how it can help the current work and give a critical evaluation, if appropriate.
+
+** Solution proposal (or proof-of-concept, if implemented)
+
+Describe the solution you want to implement.
+Give a structural overview (architecture), talk about all the elements and describe its operation.
+
+** Evaluation Methods
+*** Experimental context
+
+How is the solution going to be evaluated?
+What are the relevant criteria?
+
+*** Experiment details
+
+Based on the criteria, what tests are going to be executed, what do they measure and what will we be able to interpret from their results?
+
+*** Intermediate results (if they exist)
+
+studies, comparisons, etc.
+What data do you already have?
+
+** Workload Calendar
+
+What work is going to be done and in what order?
+What is the proposed scheduling for the work?
+
+** Conclusions
+
+State your conclusions.
+
+Regarding the references:
+
+This should mostly include articles from papers/conferences/workshops, books and technical reports.
+You should avoid web references, which may disappear at some point.
+
+** References                                                       :ignore:
+
+# See next section to understand how refs.bib file is created.
+
+#+LATEX: \bibliographystyle{splncs03}
+#+LATEX: \bibliography{refs}
+
+** Annex (Optional)
+
+Append any relevant files here, if necessary.
+
+* Bib file                                                         :noexport:
+
+Tangle this file with C-c C-v t
+
+#+begin_src bib :tangle refs.bib
+@article{orgmode,
+  author =	"Eric Schulte and Dan Davison and Thomas Dye and Carsten Dominik",
+  title =	"A Multi-Language Computing Environment for Literate Programming and Reproducible Research",
+  journal =	"J. of Stat. Soft.",
+  volume =	"46",
+  number =	"3",
+  day =  	"25",
+  year = 	"2012",
+  CODEN =	"JSSOBK",
+  ISSN = 	"1548-7660",
+  bibdate =	"2011-10-03",
+  accepted =	"2011-10-03",
+  acknowledgement = "",
+  submitted =	"2010-12-22",
+}
+
+@incollection{schnorr2013visualizing,
+  title={Visualizing More Performance Data Than What Fits on Your Screen},
+  author={Schnorr, Lucas M and Legrand, Arnaud},
+  booktitle={Tools for High Performance Computing 2012},
+  pages={149--162},
+  year={2013},
+  publisher={Springer}
+}
+#+end_src
+
+* Emacs setup                                                      :noexport:
+
+# Local Variables:
+# eval: (add-to-list 'load-path ".")
+# eval: (require 'ox-extra)
+# eval: (ox-extras-activate '(ignore-headlines))
+# eval: (add-to-list 'org-latex-classes
+#               '("LLNCS"
+#                 "\\documentclass{llncs}"
+#                 ("\\section{%s}" . "\\section*{%s}")
+#                 ("\\subsection{%s}" . "\\subsection*{%s}")
+#                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+#                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+#                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+# End:
