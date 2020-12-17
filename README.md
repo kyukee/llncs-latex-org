@@ -18,7 +18,6 @@ If compiling from inside Emacs, here are some tips:
 - you can also refresh PDF's manually with the 'g' key
 
 Here's a function to automatically compile the Org document and switch to the PDF file if successful. You can put it in your init file.
-It can be called with 'M-x my/latex-compile-and-open-pdf' or assigned to a keybind.
 
 ```lisp
 (defun my/latex-compile-and-open-pdf ()
@@ -33,7 +32,25 @@ It can be called with 'M-x my/latex-compile-and-open-pdf' or assigned to a keybi
 
 ;; dont ask for confirmation for refreshing PDF buffers
 (setq revert-without-query '(".pdf"))
+```
 
+It can be called with 'M-x my/latex-compile-and-open-pdf' or assigned to a keybind.
+
+```lisp
 ;; assign function to 'Ctrl-c l'
 (define-key org-mode-map (kbd "C-c l") 'my/latex-compile-and-open-pdf)
+```
+
+You can also make it run automatically when a file is saved.
+
+```lisp
+;; toggle compile automatically on save
+(defun toggle-org-latex-export-on-save ()
+  (interactive)
+  (if (memq 'my/latex-compile-and-open-pdf after-save-hook)
+      (progn
+        (remove-hook 'after-save-hook 'my/latex-compile-and-open-pdf t)
+        (message "Disabled org export on save for current buffer..."))
+    (add-hook 'after-save-hook 'my/latex-compile-and-open-pdf nil t)
+    (message "Enabled org export on save for current buffer...")))
 ```
